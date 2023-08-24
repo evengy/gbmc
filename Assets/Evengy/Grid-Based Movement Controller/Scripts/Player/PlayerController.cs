@@ -44,8 +44,11 @@ namespace Evengy.GridBasedMovementController.Player
             Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * rotationSpeed)
             : Quaternion.Euler(targetRotation);
 
-        public void MoveTowards(Direction direction) => targetTile = IsBusy ? targetTile : targetTile.GetTile(LocalDirection(direction));
-
+        public void MoveTowards(Direction direction)
+        {
+            targetTile = IsBusy ? targetTile : targetTile.GetTile(LocalDirection(direction));
+            transform.parent = targetTile.transform;
+        }
         public void RotateTowards(Direction direction)
         {
             if (IsBusy) return;
